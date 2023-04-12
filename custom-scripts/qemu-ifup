@@ -1,10 +1,9 @@
-#!/bin/sh
-set -x
+#!/bin/sh -x
 
 switch=br0
 
 if [ -n "$1" ];then
-        ip tuntap add $1 mode tap user `whoami`		#create tap network interface
+        ip tuntap add $1 mode tap user $SUDO_USER	#create tap network interface
         ip link set $1 up				#bring interface tap up
         sleep 0.5s					#wait the interface come up.
         sysctl -w net.ipv4.ip_forward=1                 # allow forwarding of IPv4
